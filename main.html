@@ -1,16 +1,57 @@
 <!DOCTYPE html>
-
-<html>
-
+<html lang="en">
 <head>
-	<link rel="stylesheet" href="styles.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Real-time Word Count</title>
+<style>
+  /* Add some basic styling */
+  #evaluatedText {
+    width: 100%;
+    height: 200px;
+    resize: vertical;
+  }
+</style>
 </head>
-
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
+<!-- Textbox for entering text -->
+<textarea id="evaluatedText" placeholder="Enter your essay here..."></textarea>
+
+<!-- Display word count here -->
+<h3 id="wordCount">0</h3>
+
+<script>
+  // Get references to the textbox and word count display element
+  const evaluatedText = document.getElementById('evaluatedText');
+  const wordCountDisplay = document.getElementById('wordCount');
+
+  // Function to count words
+  function countWords(text) {
+    // Trim the text to remove leading and trailing white spaces
+    const trimmedText = text.trim();
+    // If the trimmed text is empty, return 0
+    if (trimmedText === '') return 0;
+    // Split the text into words using whitespace as delimiter
+    const words = trimmedText.split(/\s+/);
+    // Return the number of words
+    return words.length;
+  }
+
+  // Function to update word count
+  function updateWordCount() {
+    // Get the text from the textbox
+    const text = evaluatedText.value;
+    // Count words in the text
+    const wordCount = countWords(text);
+    // Update the word count display
+    wordCountDisplay.textContent = wordCount;
+  }
+
+  // Attach an event listener to the textbox for input events
+  evaluatedText.addEventListener('input', updateWordCount);
+
+  // Call updateWordCount initially to set the initial word count
+  updateWordCount();
 </script>
-
 </body>
-
 </html>
